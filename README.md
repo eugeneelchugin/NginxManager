@@ -7,3 +7,4 @@ TODO
 - [ ] Exception boundary
 - [ ] Hide tray icon after app crash
 - [ ] Single instance checking
+- [ ] Show error info when nginx cannot start
