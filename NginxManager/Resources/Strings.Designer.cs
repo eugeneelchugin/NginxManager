@@ -79,7 +79,16 @@ namespace NginxManager.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start Nginx.
+        ///   Looks up a localized string similar to Reload nginx config.
+        /// </summary>
+        internal static string ReloadConfigMenuItemText {
+            get {
+                return ResourceManager.GetString("ReloadConfigMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start nginx.
         /// </summary>
         internal static string StartNginxMenuItemText {
             get {
@@ -88,7 +97,7 @@ namespace NginxManager.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop Nginx.
+        ///   Looks up a localized string similar to Stop nginx.
         /// </summary>
         internal static string StopNginxMenuItemText {
             get {

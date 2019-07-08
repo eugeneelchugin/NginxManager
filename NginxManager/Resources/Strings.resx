@@ -123,11 +123,14 @@
   <data name="NginxExe" xml:space="preserve">
     <value>nginx.exe</value>
   </data>
+  <data name="ReloadConfigMenuItemText" xml:space="preserve">
+    <value>Reload nginx config</value>
+  </data>
   <data name="StartNginxMenuItemText" xml:space="preserve">
-    <value>Start Nginx</value>
+    <value>Start nginx</value>
   </data>
   <data name="StopNginxMenuItemText" xml:space="preserve">
-    <value>Stop Nginx</value>
+    <value>Stop nginx</value>
   </data>
   <data name="TrayIconText" xml:space="preserve">
     <value>NginxManager</value>

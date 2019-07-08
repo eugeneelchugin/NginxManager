@@ -17,5 +17,7 @@ namespace NginxManager.Services
 
         private string _nginxExe;
         public string NginxExe => _nginxExe ?? (_nginxExe = Path.Combine(_appConfig.NginxLocation, Strings.NginxExe));
+
+        public string NginxDirectory => Path.GetDirectoryName(_nginxExe);
     }
 }

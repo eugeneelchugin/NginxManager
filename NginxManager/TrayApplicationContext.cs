@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using NginxManager.Resources;
 using NginxManager.Resources.Icons;
@@ -11,12 +8,12 @@ namespace NginxManager
 {
     internal class TrayApplicationContext : ApplicationContext
     {
-        private readonly INginxLocationHelper _nginxLocationHelper;
+        private readonly INginxProcessWrapper _nginx;
         private NotifyIcon _trayIcon;
 
-        public TrayApplicationContext(INginxLocationHelper nginxLocationHelper)
+        public TrayApplicationContext(INginxProcessWrapper nginx)
         {
-            _nginxLocationHelper = nginxLocationHelper;
+            _nginx = nginx;
             InitializeContext();
         }
 
@@ -42,6 +39,12 @@ namespace NginxManager
                 image: null
             );
 
+            var reloadConfig = new ToolStripMenuItem(
+                text: Strings.ReloadConfigMenuItemText,
+                onClick: HandleReloadConfigMenuItemText,
+                image: null
+            );
+
             var exitMenuItem = new ToolStripMenuItem(
                 text: Strings.ExitMenuItemText,
                 onClick: HandleExitMenuItemClick,
@@ -54,6 +57,7 @@ namespace NginxManager
                 {
                     startNginx,
                     stopNginx,
+                    reloadConfig,
                     new ToolStripSeparator(),
                     exitMenuItem
                 }
@@ -68,23 +72,19 @@ namespace NginxManager
             };
         }
 
+        private void HandleReloadConfigMenuItemText(object sender, EventArgs e)
+        {
+            _nginx.Reload();
+        }
+
         private void HandleStopNginxMenuItem(object sender, EventArgs e)
         {
-            var procInfo = new ProcessStartInfo(_nginxLocationHelper.NginxExe, "-s stop")
-            {
-                WorkingDirectory = Path.GetDirectoryName(_nginxLocationHelper.NginxExe)
-            };
-            Process.Start(procInfo);
+            _nginx.Stop();
         }
 
         private void HandleStartNginxMenuItem(object sender, EventArgs e)
         {
-            //            Process.Start("CMD.EXE", $"{_nginxLocationHelper.NginxExe}");
-            var procInfo = new ProcessStartInfo(_nginxLocationHelper.NginxExe)
-            {
-                WorkingDirectory = Path.GetDirectoryName(_nginxLocationHelper.NginxExe)
-            };
-            Process.Start(procInfo);
+            _nginx.Start();
         }
 
         private void HandleExitMenuItemClick(object sender, EventArgs e)
