@@ -1,5 +1,5 @@
 # NginxManager
-Little util for start, stop and reload nginx from tray
+Little util to start, stop and reload nginx from tray
 
 TODO
 - [ ] Edit nginx.conf menu item
