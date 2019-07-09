@@ -12,12 +12,18 @@ namespace NginxManager.Services
         public NginxLocationHelper(IAppConfig appConfig)
         {
             _appConfig = appConfig;
+            SetNginxLocation(appConfig.NginxLocation);
         }
 
+        private void SetNginxLocation(string nginxLocation)
+        {
+            NginxDirectory = nginxLocation;
+            NginxExe = Path.Combine(nginxLocation, Strings.NginxExe);
+            NginxConfig = Path.Combine(nginxLocation, Strings.RelativeConfigPath);
+        }
 
-        private string _nginxExe;
-        public string NginxExe => _nginxExe ?? (_nginxExe = Path.Combine(_appConfig.NginxLocation, Strings.NginxExe));
-
-        public string NginxDirectory => Path.GetDirectoryName(_nginxExe);
+        public string NginxExe { get; private set; }
+        public string NginxDirectory { get; private set; }
+        public string NginxConfig { get; private set; }
     }
 }

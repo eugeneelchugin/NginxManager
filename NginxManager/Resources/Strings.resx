@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="EditConfigMenuItemText" xml:space="preserve">
+    <value>Edit nginx.conf</value>
+  </data>
   <data name="ExitMenuItemText" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="NginxExe" xml:space="preserve">
     <value>nginx.exe</value>
+  </data>
+  <data name="RelativeConfigPath" xml:space="preserve">
+    <value>conf/nginx.conf</value>
   </data>
   <data name="ReloadConfigMenuItemText" xml:space="preserve">
     <value>Reload nginx config</value>

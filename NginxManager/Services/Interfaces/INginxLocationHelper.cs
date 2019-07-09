@@ -4,5 +4,6 @@
     {
         string NginxExe { get; }
         string NginxDirectory { get; }
+        string NginxConfig { get; }
     }
 }

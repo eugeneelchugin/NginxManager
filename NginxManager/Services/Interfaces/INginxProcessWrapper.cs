@@ -5,5 +5,6 @@
         void Reload();
         void Stop();
         void Start();
+        void OpenConfig();
     }
 }

@@ -61,6 +61,15 @@ namespace NginxManager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit nginx.conf.
+        /// </summary>
+        internal static string EditConfigMenuItemText {
+            get {
+                return ResourceManager.GetString("EditConfigMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         internal static string ExitMenuItemText {
@@ -75,6 +84,15 @@ namespace NginxManager.Resources {
         internal static string NginxExe {
             get {
                 return ResourceManager.GetString("NginxExe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to conf/nginx.conf.
+        /// </summary>
+        internal static string RelativeConfigPath {
+            get {
+                return ResourceManager.GetString("RelativeConfigPath", resourceCulture);
             }
         }
         

@@ -41,6 +41,9 @@ namespace NginxManager.Services
             Process.Start(startInfo);
         }
 
-
+        public void OpenConfig()
+        {
+            Process.Start(_nginxLocationHelper.NginxConfig);
+        }
     }
 }

@@ -39,6 +39,12 @@ namespace NginxManager
                 image: null
             );
 
+            var editConfig = new ToolStripMenuItem(
+                text: Strings.EditConfigMenuItemText,
+                onClick: HandleEditConfigMenuItem,
+                image: null
+            );
+
             var reloadConfig = new ToolStripMenuItem(
                 text: Strings.ReloadConfigMenuItemText,
                 onClick: HandleReloadConfigMenuItemText,
@@ -57,6 +63,7 @@ namespace NginxManager
                 {
                     startNginx,
                     stopNginx,
+                    editConfig,
                     reloadConfig,
                     new ToolStripSeparator(),
                     exitMenuItem
@@ -70,6 +77,11 @@ namespace NginxManager
                 ContextMenuStrip = mainContextMenu,
                 Visible = true
             };
+        }
+
+        private void HandleEditConfigMenuItem(object sender, EventArgs e)
+        {
+            _nginx.OpenConfig();
         }
 
         private void HandleReloadConfigMenuItemText(object sender, EventArgs e)
