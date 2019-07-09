@@ -1,7 +1,7 @@
 # NginxManager
 Tiny tray app to manage your local nginx
 
-##Features
+## Features
 * Start/Stop nginx
 * Reload config
 * Edit config
