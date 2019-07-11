@@ -6,5 +6,6 @@
         void Stop();
         void Start();
         void OpenConfig();
+        bool IsStarted { get; }
     }
 }

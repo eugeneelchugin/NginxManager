@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using System.IO;
+using System.Linq;
 using NginxManager.Constants;
 using NginxManager.Services.Interfaces;
 
@@ -45,5 +45,18 @@ namespace NginxManager.Services
         {
             Process.Start(_nginxLocationHelper.NginxConfig);
         }
+
+        public bool IsStarted => Process.GetProcesses().Any(process =>
+        {
+            try
+            {
+                var processFileName = process?.MainModule?.FileName;
+                return processFileName != null && processFileName == @"C:\Program Files\nginx\nginx.exe";
+            }
+            catch
+            {
+                return false;
+            }
+        });
     }
 }

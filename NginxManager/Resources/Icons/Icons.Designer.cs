@@ -63,9 +63,29 @@ namespace NginxManager.Resources.Icons {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon MainIcon {
+        internal static System.Drawing.Icon Nginx {
             get {
-                object obj = ResourceManager.GetObject("MainIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("Nginx", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon NginxStarted {
+            get {
+                object obj = ResourceManager.GetObject("NginxStarted", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon NginxStoped {
+            get {
+                object obj = ResourceManager.GetObject("NginxStoped", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
