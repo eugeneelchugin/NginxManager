@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Newtonsoft.Json;
+﻿using System;
+using Microsoft.Extensions.Configuration;
 using NginxManager.Configuration.Interfaces;
 using NginxManager.Configuration.Models;
 
@@ -7,12 +7,25 @@ namespace NginxManager.Configuration
 {
     public class AppConfig : IAppConfig
     {
-        private readonly AppConfigJsonModel _jsonConfig;
-        public AppConfig()
+        private readonly IConfiguration _appConfig;
+
+        private readonly AppConfigModel _configModel;
+        public AppConfig(IConfiguration appConfig)
         {
-            _jsonConfig = JsonConvert.DeserializeObject<AppConfigJsonModel>(File.ReadAllText("./config.json"));
+            _appConfig = appConfig;
+            _configModel = new AppConfigModel();
+            BindConfig();
         }
 
-        public string NginxLocation => _jsonConfig.NginxLocation;
+        private void BindConfig()
+        {
+            _appConfig.Bind(_configModel);
+            _appConfig.GetReloadToken().RegisterChangeCallback(obj =>
+            {
+                BindConfig();
+            }, null);
+        }
+
+        public string NginxLocation => _configModel.NginxLocation;
     }
 }

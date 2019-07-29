@@ -5,9 +5,9 @@ using NginxManager.Resources.Icons;
 using NginxManager.Services.Interfaces;
 using NginxManager.ViewModels;
 
-namespace NginxManager
+namespace NginxManager.AppStart
 {
-    internal class TrayApplicationContext : ApplicationContext
+    public class TrayApplicationContext : ApplicationContext
     {
         private readonly INginxProcessWrapper _nginx;
         private NotifyIcon _trayIcon;

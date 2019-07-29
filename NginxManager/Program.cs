@@ -1,6 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
-using Autofac;
+using Microsoft.Extensions.Configuration;
 using NginxManager.AppStart;
 
 namespace NginxManager
@@ -15,10 +16,22 @@ namespace NginxManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            CreateHostBuilder().Build().Run();
+        }
 
-            var container = CompositionRoot.Container;
-            var appContext = container.Resolve<TrayApplicationContext>();
-            Application.Run(appContext);
+        private static HostBuilder CreateHostBuilder()
+        {
+            var hostBuilder = new HostBuilder();
+            hostBuilder
+                .ConfigureAppConfiguration(config =>
+                    {
+                        config
+                            .SetBasePath(Directory.GetCurrentDirectory())
+                            .AddJsonFile("Config.json", optional: false, reloadOnChange: true);
+                    }
+                )
+                .ConfigureServices(CompositionRoot.Configure);
+            return hostBuilder;
         }
     }
 }

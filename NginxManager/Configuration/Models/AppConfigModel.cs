@@ -1,6 +1,6 @@
 ﻿namespace NginxManager.Configuration.Models
 {
-    public class AppConfigJsonModel
+    public class AppConfigModel
     {
         public string NginxLocation { get; set; }
     }

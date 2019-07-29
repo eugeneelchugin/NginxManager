@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Autofac;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace NginxManager.AppStart
 {
@@ -10,26 +10,19 @@ namespace NginxManager.AppStart
     {
         private static readonly string[] AutoRegisterNamespaces = {"configuration", "services"};
 
-        private static IContainer _container;
-
-        public static IContainer Container => _container ?? (_container = CreateContainer());
-
-        
-
-
-        private static IContainer CreateContainer()
+        public static void Configure(IServiceCollection services)
         {
-            var builder = new ContainerBuilder();
-
             var currentAssembly = Assembly.GetExecutingAssembly();
-            builder.RegisterAssemblyTypes(currentAssembly)
-                .Where(type => AutoRegisterNamespaces.Any(ns =>
-                        type.Namespace.EndsWith(ns, StringComparison.CurrentCultureIgnoreCase)))
-                .AsImplementedInterfaces();
 
-            builder.RegisterType<TrayApplicationContext>().SingleInstance();
+            (from implementation in currentAssembly.DefinedTypes
+             from service in implementation.ImplementedInterfaces
+             where AutoRegisterNamespaces.Any(ns =>
+                 // ReSharper disable once PossibleNullReferenceException because of type cannot be null in assembly and always has a namespace
+                 implementation.Namespace.EndsWith(ns, StringComparison.InvariantCultureIgnoreCase))
+             select new { Service = service, Implementation = implementation })
+            .ToList().ForEach( registration => services.AddSingleton(registration.Service, registration.Implementation));
 
-            return builder.Build();
+            services.AddSingleton<TrayApplicationContext>();
         }
     }
 }
