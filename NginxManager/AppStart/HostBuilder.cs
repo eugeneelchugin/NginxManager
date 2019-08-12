@@ -8,6 +8,7 @@ namespace NginxManager.AppStart
     {
         private Action<IConfigurationBuilder> _configureConfig;
         private Action<IServiceCollection> _configureServices;
+        private Action<IServiceCollection> _registerExceptionBoundary;
 
         private IConfiguration _appConfig;
         private IServiceProvider _appServices;
@@ -22,8 +23,14 @@ namespace NginxManager.AppStart
         private void CreateServiceProvider()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IConfiguration>(_appConfig);
+            services.AddSingleton(_appConfig);
             services.AddSingleton<Host>();
+            if (_registerExceptionBoundary == null)
+            {
+                _registerExceptionBoundary =
+                    srvs => srvs.AddSingleton<IExceptionBoundary>(serviceProvider => null);
+            }
+            _registerExceptionBoundary(services);
             _configureServices(services);
             _appServices = services.BuildServiceProvider();
         }
@@ -44,6 +51,13 @@ namespace NginxManager.AppStart
         public HostBuilder ConfigureServices(Action<IServiceCollection> configureServices)
         {
             _configureServices = configureServices;
+            return this;
+        }
+
+        public HostBuilder ConfigureExceptionBoundary<TBoundary>()
+            where TBoundary : class, IExceptionBoundary
+        {
+            _registerExceptionBoundary = services => services.AddSingleton<IExceptionBoundary, TBoundary>();
             return this;
         }
     }

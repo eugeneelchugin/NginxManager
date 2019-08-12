@@ -30,7 +30,8 @@ namespace NginxManager
                             .AddJsonFile("Config.json", optional: false, reloadOnChange: true);
                     }
                 )
-                .ConfigureServices(CompositionRoot.Configure);
+                .ConfigureServices(CompositionRoot.Configure)
+                .ConfigureExceptionBoundary<ExceptionBoundary>();
             return hostBuilder;
         }
     }

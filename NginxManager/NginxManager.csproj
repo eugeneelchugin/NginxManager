@@ -126,8 +126,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppStart\CompositionRoot.cs" />
+    <Compile Include="AppStart\ExceptionBoundary.cs" />
     <Compile Include="AppStart\Host.cs" />
     <Compile Include="AppStart\HostBuilder.cs" />
+    <Compile Include="AppStart\IExceptionBoundary.cs" />
     <Compile Include="AppState.cs" />
     <Compile Include="Configuration\AppConfig.cs" />
     <Compile Include="Configuration\Interfaces\IAppConfig.cs" />
